@@ -22,7 +22,6 @@ public partial class ManagerInventory : System.Web.UI.Page
     }
     private void MyBind()
     {
-        /*
         string s = "select HId,Name,Unit,Warehouse,Result from Result order by HId desc";
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]);
         con.Open();
@@ -32,30 +31,6 @@ public partial class ManagerInventory : System.Web.UI.Page
         con.Close();
         GridView1.DataSource = ds.Tables[0].DefaultView;
         GridView1.DataBind();
-        */
-        string sqlcoon = "Data Source=DESKTOP-5EMUFJI;Initial Catalog=BaseManagement;Integrated Security=True";
-        string sql = "select HId,Name,Unit,Warehouse,Result from Result order by HId desc";
-        using (SqlConnection con = new SqlConnection(sqlcoon))//SqlConnection连接，用using释放连接
-        {
-            using (SqlCommand com = new SqlCommand(sql, con))//SqlCommand连接，用using释放连接
-            {
-                using (SqlDataAdapter da = new SqlDataAdapter(sql, con))
-                {
-                    //打开连接
-                    con.Open();
-                    DataSet ds = new DataSet();
-                    da.Fill(ds);
-                    con.Close();
-                    GridView1.DataSource = ds.Tables[0].DefaultView;
-                    GridView1.DataBind();
-                    //关闭连接
-                    con.Close();
-                    //释放连接
-                    // con.Dispose();
-
-                }
-            }
-        }
     }
     protected void GridView1_PageIndexChanging1(object sender, GridViewPageEventArgs e)
     {
@@ -64,7 +39,6 @@ public partial class ManagerInventory : System.Web.UI.Page
     }
     protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-        /*
         string str = "delete from Result where HId='" + this.GridView1.DataKeys[e.RowIndex].Value.ToString() + "'";
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]);
         con.Open();
@@ -72,19 +46,5 @@ public partial class ManagerInventory : System.Web.UI.Page
         cmd.ExecuteNonQuery();
         con.Close();
         MyBind();
-        */
-        string sqlcoon = "Data Source=DESKTOP-5EMUFJI;Initial Catalog=BaseManagement;Integrated Security=True";
-        string sql = "delete from Result where HId='" + this.GridView1.DataKeys[e.RowIndex].Value.ToString() + "'";
-        using (SqlConnection con = new SqlConnection(sqlcoon))//SqlConnection连接，用using释放连接
-        {
-            using (SqlCommand com = new SqlCommand(sql, con))//SqlCommand连接，用using释放连接
-            {
-                con.Open();
-                int resert = Convert.ToInt32(com.ExecuteNonQuery());
-                con.Close();
-                MyBind();
-            }
-        }
-        Response.Write("<script language='javascript'>alert('经手人信息删除成功！');</script>");
     }
 }

@@ -22,30 +22,7 @@ public partial class ManagerInWarehouse : System.Web.UI.Page
     }
     private void Bind()
     {
-        string sqlcoon = "Data Source=DESKTOP-5EMUFJI;Initial Catalog=BaseManagement;Integrated Security=True";
-        string sql = "select IId,IDate,Number,ProductName,Count,InPrice,Total,Notes,SupplyUnit,Person from InWarehouse order by IId desc";
-        using (SqlConnection con = new SqlConnection(sqlcoon))//SqlConnection连接，用using释放连接
-        {
-            using (SqlCommand com = new SqlCommand(sql, con))//SqlCommand连接，用using释放连接
-            {
-                using(SqlDataAdapter da = new SqlDataAdapter(sql, con))
-                {
-                    //打开连接
-                    con.Open();
-                    DataSet ds = new DataSet();
-                    da.Fill(ds);
-                    con.Close();
-                    GridView1.DataSource = ds.Tables[0].DefaultView;
-                    GridView1.DataBind();
-                    //关闭连接
-                    con.Close();
-                    //释放连接
-                    // con.Dispose();
-
-                }
-            }
-        }
-        /*string s = "select IId,IDate,Number,ProductName,Count,InPrice,Total,Notes,SupplyUnit,Person from InWarehouse order by IId desc";
+        string s = "select IId,IDate,Number,ProductName,Count,InPrice,Total,Notes,SupplyUnit,Person from InWarehouse order by IId desc";
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]);
         con.Open();
         SqlDataAdapter da = new SqlDataAdapter(s, con);
@@ -53,7 +30,7 @@ public partial class ManagerInWarehouse : System.Web.UI.Page
         da.Fill(ds);
         con.Close();
         GridView1.DataSource = ds.Tables[0].DefaultView;
-        GridView1.DataBind();*/
+        GridView1.DataBind();
     }
     protected void GridView1_PageIndexChanging1(object sender, GridViewPageEventArgs e)
     {
@@ -72,7 +49,7 @@ public partial class ManagerInWarehouse : System.Web.UI.Page
     }
     protected void Button2_Click(object sender, EventArgs e)
     {
-        /*string s = "select IId,IDate,Number,ProductName,Count,InPrice,Total,Notes,SupplyUnit,Person from InWarehouse where SupplyUnit ='" + TextBox1.Text + "'";
+        string s = "select IId,IDate,Number,ProductName,Count,InPrice,Total,Notes,SupplyUnit,Person from InWarehouse where SupplyUnit ='" + TextBox1.Text + "'";
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]);
         con.Open();
         SqlDataAdapter da = new SqlDataAdapter(s, con);
@@ -80,37 +57,7 @@ public partial class ManagerInWarehouse : System.Web.UI.Page
         da.Fill(ds);
         con.Close();
         GridView1.DataSource = ds.Tables[0].DefaultView;
-        GridView1.DataBind();*/
-        string sqlcoon = "Data Source=DESKTOP-5EMUFJI;Initial Catalog=BaseManagement;Integrated Security=True";
-        string sql = "select IId,IDate,Number,ProductName,Count,InPrice,Total,Notes,SupplyUnit,Person from InWarehouse where SupplyUnit ='" + TextBox1.Text + "'";
-        using (SqlConnection con = new SqlConnection(sqlcoon))//SqlConnection连接，用using释放连接
-        {
-            using (SqlCommand com = new SqlCommand(sql, con))//SqlCommand连接，用using释放连接
-            {
-                using (SqlDataAdapter da = new SqlDataAdapter(sql, con))
-                {
-                    //打开连接
-                    con.Open();
-                    /*
-                    DataSet ds = new DataSet();
-                    da.Fill(ds);
-                    con.Close();
-                    GridView1.DataSource = ds.Tables[0].DefaultView;
-                    GridView1.DataBind();
-                    */
+        GridView1.DataBind();
 
-                    DataSet ds = new DataSet();
-                    da.Fill(ds);
-                    con.Close();
-                    GridView1.DataSource = ds.Tables[0].DefaultView;
-                    GridView1.DataBind();
-                    //关闭连接
-                    //con.Close();
-                    //释放连接
-                    // con.Dispose();
-
-                }
-            }
-        }
     }
 }

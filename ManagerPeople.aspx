@@ -39,7 +39,7 @@ body {
       OnPageIndexChanging="GridView1_PageIndexChanging1" 
               OnRowDeleting="GridView1_RowDeleting"  Width="100%" CellPadding="4"   
               PageSize="8" HorizontalAlign="Left" AllowPaging="True" 
-              DataKeyNames ="userID" ForeColor="#333333" GridLines="None" OnRowUpdating="GridView1_RowUpdating">
+              DataKeyNames ="userID" ForeColor="#333333" GridLines="None">
               <Columns>
                   <asp:BoundField DataField="userID" Visible="False" />
                   <asp:BoundField DataField="Number" HeaderText="经手人编号" />
