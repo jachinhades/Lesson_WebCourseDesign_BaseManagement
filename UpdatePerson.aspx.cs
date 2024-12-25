@@ -19,7 +19,7 @@ public partial class UpdatePerson : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            bid = Request["ID"].ToString();
+            bid = Session["ID"].ToString();
             Bind(bid);
         }
     }

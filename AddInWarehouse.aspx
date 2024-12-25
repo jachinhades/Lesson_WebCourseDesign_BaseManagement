@@ -73,16 +73,16 @@ body {
     <td bgcolor="#FFFFFF" style="height: 10px" colspan="2">
         经 &nbsp; 办 &nbsp;人：<asp:DropDownList ID="DropDownList2" runat="server" AutoPostBack="True" DataSourceID="SqlDataSource2"
             DataTextField="Name" DataValueField="Name">
-        </asp:DropDownList><asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:kc_dbConnectionString %>"
-            SelectCommand="SELECT [Name] FROM [Person]"></asp:SqlDataSource>
+        </asp:DropDownList><asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:BaseManagementConnectionString %>"
+            SelectCommand="SELECT [userID], [Name], [tel], [Number] FROM [Person]"></asp:SqlDataSource>
     </td>
     </tr>
     <tr>
     <td style="height: 10px" colspan="2">
         供货单位：<asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" DataSourceID="SqlDataSource1"
             DataTextField="Name" DataValueField="Name">
-        </asp:DropDownList><asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:kc_dbConnectionString %>"
-            SelectCommand="SELECT [Name] FROM [SupplyUnit]"></asp:SqlDataSource>
+        </asp:DropDownList><asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:BaseManagementConnectionString2 %>"
+            SelectCommand="SELECT [GId], [Number], [Name], [Address], [person], [tel] FROM [SupplyUnit]"></asp:SqlDataSource>
     </td>
     </tr>
     <tr>

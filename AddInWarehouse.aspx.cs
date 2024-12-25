@@ -30,15 +30,47 @@ public partial class AddInWarehouse : System.Web.UI.Page
             notes = this.TextBox7.Text;
             supply = this.DropDownList1.Text;
             people = this.DropDownList2.Text;
+            string sqlcoon = "Data Source=DESKTOP-5EMUFJI;Initial Catalog=BaseManagement;Integrated Security=True";
+            string sql = "insert into InWarehouse(IDate,Number,ProductName,Count,InPrice,Total,Notes,SupplyUnit,Person) values (@IDate, @Number, @ProductName, @Count, @InPrice, @Total, @Notes, @SupplyUnit, @Person)";
+            SqlParameter[] par = {
+                new SqlParameter("@IDate",date),
+                new SqlParameter("@Number",number),
+                new SqlParameter("@ProductName",name),
+                new SqlParameter("@Count",units),
+                new SqlParameter("@InPrice",inprice),
+                new SqlParameter("@Total",total),
+                new SqlParameter("@Notes",notes),
+                new SqlParameter("@SupplyUnit",supply),
+                new SqlParameter("@Person",people)
+                };
+            using (SqlConnection con = new SqlConnection(sqlcoon))//SqlConnection连接，用using释放连接
 
-            SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]);
+            {
+                using (SqlCommand com = new SqlCommand(sql, con))//SqlCommand连接，用using释放连接
+
+                {
+                    com.Parameters.AddRange(par);
+                    //打开连接
+                    con.Open();
+
+                    int resert = Convert.ToInt32(com.ExecuteNonQuery());
+                    //关闭连接
+                    con.Close();
+                    //释放连接
+                    // con.Dispose();
+
+                }
+            }
+            Response.Write("<script language='javascript'>alert('入库产品信息添加成功！');</script>");
+            Server.Transfer("ManagerInWarehouse.aspx");
+            /*SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["Data Source=DESKTOP-5EMUFJI;Initial Catalog=BaseManagement;Integrated Security=True"]);
             con.Open();
             SqlCommand cmd = new SqlCommand("insert into InWarehouse(IDate,Number,ProductName,Count,InPrice,Total,Notes,SupplyUnit,Person) values ('" + date + "','" + number + "','" + name + "','" + units + "','" + inprice + "','" + total + "','" + notes + "','" + supply + "','" + people + "')", con);
             cmd.ExecuteNonQuery();
             cmd.Dispose();
             con.Close();
             Response.Write("<script language='javascript'>alert('入库产品信息添加成功！');</script>");
-            Server.Transfer("ManagerInWarehouse.aspx");
+            Server.Transfer("ManagerInWarehouse.aspx");*/
         }
     }
     private bool IsNull()
